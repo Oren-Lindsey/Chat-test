@@ -14,16 +14,18 @@ app.use((req,res,next) => {
 
 app.use(express.static('public'))
 app.get('/', (req, res) => {
-  if (req.headers['x-replit-user-id'].length > 0) {
+  /*if (req.headers['x-replit-user-id'] !== undefined && req.headers['x-replit-user-id'].length > 0) {
     var userData = []
     userData.user_id = req.headers['x-replit-user-id']
     userData.user_name = req.headers['x-replit-user-name']
     userData.user_roles = req.headers['x-replit-user-roles']
+    console.log(userData)
     res.sendFile(__dirname + '/public/html/index.html')
   } else {
     res.sendFile(__dirname + '/public/html/logged-out.html')
     console.log('not logged in')
-  }
+  }*/
+  res.sendFile(__dirname + '/public/html/index.html')
 });
 
 const server = app.listen(port, () => {
