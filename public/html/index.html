@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#93d1a0">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2a6236">
+  </head>
+  <body>
+    <div class="sidenav">
+      <a href="#">Test</a>
+      <a href="#">Test2</a>
+      <a href="#">Test3</a>
+      <a href="#">Test4</a>
+    </div>
+    <div class="main">
+      <ul id="messages"></ul>
+      <form id="form" action="" class="lessWide">
+        <input id="input" autofocus="true" placeholder="Type here..."/><button>Send</button>
+      </form>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/script.js"></script>
+  </body>
+</html>

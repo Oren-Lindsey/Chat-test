@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3&display=swap');
+
+
+/*color pallette:
+light mode:
+for server messages background, accents and other (this is the theme color): #93d1a0 (green)
+for other accents (unused): #bc3042 (red)
+messages and text color: #000000 (black)
+messages form/messages from you: #efefef (grey)
+messages from other people/background of page: #fff (white)
+dark mode:
+for server messages background, accents and other (this is the theme color): #93d1a0 (green)
+for other accents (unused): #bc3042 (red)
+messages and text color: #fff (white)
+messages form/messages from you: #3d3d3d (dark grey)
+messages from other people/background of page: #232323 (black)
+*/
+@media (prefers-color-scheme: light) {
+  body {  
+    padding-bottom: 3rem; 
+    font-family: 'Source Sans 3', sans-serif;;
+    background-color: #fff;
+  }
+  #form { 
+    background: #efefef; 
+    padding: 0.125rem; 
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    display: flex;
+    height: 3rem; 
+    box-sizing: border-box; 
+    backdrop-filter: blur(10px); 
+  }
+  #input { 
+    border: none; 
+    padding: 0 1rem;
+    flex-grow: 1; 
+    border-radius: 0rem;
+    margin: 0.25rem; 
+    margin-left: 160px;
+    padding-left: 1rem;
+  }
+  #input:focus { 
+    outline: none; 
+  }
+  #form > button { 
+    background: #93d1a0; 
+    border: none; 
+    padding: 0 1rem; 
+    margin: 0.25rem; 
+    border-radius: 0rem; 
+    outline: none; 
+    transition-duration: 0.2s;
+    color: #000000;
+  }
+  #form > button:hover { 
+    background: #bc3042; 
+  }
+  #messages { 
+    list-style-type: none; 
+    margin: 0; 
+    padding: 0; 
+  }
+  #messages > li { 
+    padding: 0.5rem 1rem; 
+    word-wrap: break-word;
+  }
+  .mine {
+    background: #efefef;
+  }
+  .notMine {
+    background: #fff;
+  }
+  .server {
+    background: #93d1a0;
+    color: #000000
+  }
+  .sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+    display: block;
+    flex-grow: 1;
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  /* Style page content */
+  .main {
+    margin-left: 160px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body { 
+    margin: 0; 
+    padding-bottom: 3rem; 
+    font-family: 'Source Sans 3', sans-serif;
+    background-color: #232323;
+    color: #fff
+  }
+  #form { 
+    background: #3d3d3d; 
+    padding: 0.125rem; 
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    display: flex; 
+    height: 3rem; 
+    box-sizing: border-box; 
+    backdrop-filter: blur(10px);
+  }
+  #input { 
+    border: none; 
+    padding: 0 1rem; 
+    flex-grow: 1; 
+    border-radius: 0rem; 
+    margin: 0.25rem;
+    margin-left: 160px;
+    background-color: #232323;
+    color: #fff
+  }
+  #input:focus { 
+    outline: none; 
+  }
+  #form > button { 
+    background: #2a6236; 
+    border: none; 
+    padding: 0 1rem; 
+    margin: 0.25rem; 
+    border-radius: 0rem; 
+    outline: none; 
+    color: #fff;
+  }
+  #form > button:hover { 
+    background: #bc3042; 
+  }
+  #messages { 
+    list-style-type: none; 
+    margin: 0; 
+    padding: 0; 
+  }
+  #messages > li { 
+    padding: 0.5rem 1rem; 
+    word-wrap: break-word;
+  }
+  .mine {
+    background: #3d3d3d;
+  }
+  .notMine {
+    background: #232323;
+    color: #fff
+  }
+  .server {
+    background: #2a6236;
+    color: #fff
+  }
+  .sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  /* Style page content */
+  .main {
+    margin-left: 160px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+}

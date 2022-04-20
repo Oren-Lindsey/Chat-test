@@ -1,48 +1,62 @@
 const express = require('express');
 const app = express();
-const http = require('http');
-const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server);
+const port = 3000
+const bot = require('./bot.js')
+const ejs = require('ejs')
+const { instrument } = require("@socket.io/admin-ui");
+let botChecker = new bot()
+botChecker.setup()
+app.use((req,res,next) => {
+  res.set('Access-Control-Allow-Origin', '*')
+  next()
+})
 
+app.use(express.static('public'))
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
-app.get('/test', (req, res) => {
-  res.sendFile(__dirname + '/test.html');
+  if (req.headers['x-replit-user-id'].length > 0) {
+    var userData = []
+    userData.user_id = req.headers['x-replit-user-id']
+    userData.user_name = req.headers['x-replit-user-name']
+    userData.user_roles = req.headers['x-replit-user-roles']
+    res.sendFile(__dirname + '/public/html/index.html')
+  } else {
+    res.sendFile(__dirname + '/public/html/logged-out.html')
+    console.log('not logged in')
+  }
 });
 
+const server = app.listen(port, () => {
+  console.log('listening');
+});
+
+const io = new Server(server);
+instrument(io, {
+  auth: false,
+  namespaceName: "/admin-view"
+});
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  console.log('a user connected, getting their name');
   socket.on('newUser', function(name){
     socket.id = name;
   });
   socket.on('disconnect', (name) => {
-    console.log('user disconnected');
     id = socket.id;
-    console.log(id);
+    console.log(`${id} disconnected`);
     io.emit('user disconnected', id);
   });
   socket.on('chat message', (msg, name) => {
-    io.emit('chat message', msg, name);
+    console.log(`${name} sent: ${msg}`)
+    checkedMessage = botChecker.checkForBotMessages(msg, name);
+    var bot = false
+    io.emit('chat message', checkedMessage.msg, name, bot);
+    if (checkedMessage.hasOwnProperty('bot')) {
+      var bot = true
+      io.emit('chat message', checkedMessage.bot, `bot`, bot);
+    }
   });
   socket.on('name', (name) => {
-    console.log(`${name} connected`);
+    console.log(`"${name}" connected`);
     io.emit('user connected', name);
   });
-  //test channel
-  socket.on('test/chat message', (msg, name) => {
-    io.to("test").emit('test/chat message', msg, name);
-  });
-  socket.on('test/name', (name) => {
-    console.log(`${name} connected`);
-    io.to("test").emit('test/user connected', name);
-  });
-  socket.on('joining test channel', (name) => {
-    socket.join("test");
-    console.log('user joined test channel');
-  });
-});
-server.listen(3000, () => {
-  console.log('listening on *:3000');
 });
